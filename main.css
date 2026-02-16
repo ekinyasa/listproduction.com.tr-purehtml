@@ -430,6 +430,7 @@ section#video .close-video {
     position: relative;
     cursor: pointer;
     transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+    text-indent: 41px;
 }
 
 section#video .close-video::before,
@@ -438,7 +439,7 @@ section#video .close-video::after {
     position: absolute;
     top: 6px;
     bottom: 6px;
-    left: 15px;
+    left: 13px;
     width: 2px;
     background-color: currentColor;
     transform: rotate(45deg);
