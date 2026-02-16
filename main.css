@@ -423,10 +423,12 @@ section#video.opened {
 }
 
 section#video iframe {
-    width: 98%;
-    max-width: 1200px;
+    width: 96vw;
+    max-width: 1600px;
     height: 90%;
+    max-height: 90vh;
     border: none;
+    box-sizing: border-box;
 }
 
 section#video .close-video {
@@ -494,14 +496,21 @@ section#work {
 }
 
 section#work #films {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    --film-columns: 1;
+    grid-template-columns: repeat(var(--film-columns, 1), minmax(0, 1fr));
+    gap: 35px 25px;
     flex-grow: 4;
-    align-items: stretch;
-    align-content: stretch;
-    justify-content: stretch;
-    flex-basis:0
+    align-content: flex-start;
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    justify-content: end;
+    flex-basis: 0;
+}
+
+section#work #films .magazine {
+    display: contents;
 }
 
 section#work #films .film {
@@ -509,7 +518,7 @@ section#work #films .film {
     background-size: contain;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-items: center;
     flex-grow: 1;
     cursor:pointer
@@ -535,6 +544,45 @@ section#work #films .film li:nth-child(2) span {
     width: 100%;
     height: auto;
     max-width:100%
+}
+
+.films-pagination {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+    font-size: 18px;
+    margin-top: 25px;
+    color: #000;
+    width: 100%;
+    align-self: stretch;
+}
+
+.films-pagination.hidden {
+    display: none;
+}
+
+.films-pagination button {
+    background: transparent;
+    border: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    padding: 0 8px;
+    transition: color .2s ease;
+}
+
+.films-pagination button.active {
+    color: #d87148;
+    font-weight: 700;
+}
+
+.films-empty {
+    font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+    font-size: 20px;
+    color: #000;
 }
 
 @media screen and (min-width: 300px) {
@@ -627,7 +675,7 @@ section#work #films .film li:nth-child(2) span {
     }
 
     section#work #films {
-        flex-direction:row
+        --film-columns: 2;
     }
 
     .motto {
@@ -725,6 +773,12 @@ section#work #films .film li:nth-child(2) span {
 
     .film, .film:nth-child(1) {
         margin: 0
+    }
+}
+
+@media screen and (min-width: 2200px) {
+    section#work #films {
+        --film-columns: 3;
     }
 }
 
