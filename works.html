@@ -1,0 +1,171 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>The List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+
+
+    <link rel="stylesheet" href="main.css">
+
+
+</head>
+
+<body class="works">
+    <nav>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.html">
+            <div id="logo">
+                <img id="mobilelogo" src="assets/Artboard1@4x.png" alt="The List logo">
+            </div>
+        </a>
+        <div id="links">
+            <a id="link_thelist" class="thelist" href="index.html"><span> THE LIST </span></a>
+            <a id="link_works" class="works" href="works.html">
+                <span>WORKS</span>
+            </a>
+
+            <a id="link_hello" class="hello" href="hello.html"><span>HELLO</span></a>
+        </div>
+        <div id="timeClock"><span id="titleTime">LOCAL TIME:&nbsp;</span>Mon
+            06:18 PM</div>
+    </nav>
+
+
+
+    <section id="video" class="closed" aria-hidden="true">
+        <button type="button" class="close-video" aria-label="Close video">Close</button>
+        <iframe width="98%" height="90%" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen title="Video player" src=""></iframe>
+    </section>
+
+
+
+
+
+    <section id="work">
+        <div class="motto"><img src="assets/recentworks.png" width="100%"
+                height="auto" alt="Recent Works"></div>
+        <div id="films">
+            <div class="magazine">
+                <div class="film" data-video="https://www.youtube.com/embed/WXv31OmnKqQ">
+                    <li><span class="t1"><strong>BAŞAKŞEHİR TARİHİNİ SEN YAZ</strong></span></li>
+                    <li><span class="t2">BEIN CONNECT</span></li><img
+                        src="assets/1.png" class="filmCover" alt="Başakşehir Tarihini Sen Yaz">
+                </div>
+                <div class="film" data-video="https://www.youtube.com/embed/e2QKlmMT8II">
+                    <li><span class="t1"><strong>NE YAZIYOR</strong> | 1.SEZON</span></li>
+                    <li><span class="t2">TRT2</span></li><img
+                        src="assets/2.png" class="filmCover" alt="Ne Yazıyor 1. Sezon">
+                </div>
+            </div>
+            <div class="magazine">
+                <div class="film" data-video="https://www.youtube.com/embed/1k0bqM6nu4g">
+                    <li><span class="t1"><strong>NE YAZIYOR</strong> | 2.SEZON</span></li>
+                    <li><span class="t2">TRT2</span></li><img
+                        src="assets/3.png" class="filmCover" alt="Ne Yazıyor 2. Sezon">
+                </div>
+                <div class="film" data-video="https://www.youtube.com/embed/aAkMkVFwAoo">
+                    <li><span class="t1"><strong>RAYLAR BOYUNCA</strong></span></li>
+                    <li><span class="t2">KANAL24</span></li><img
+                        src="assets/4.png" class="filmCover" alt="Raylar Boyunca">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const videoSection = document.getElementById('video');
+            const iframe = videoSection.querySelector('iframe');
+            const closeButton = videoSection.querySelector('.close-video');
+            const films = document.querySelectorAll('.film[data-video]');
+            const activeClass = 'opened';
+
+            const toggleVideoState = (isOpen) => {
+                videoSection.classList.toggle(activeClass, isOpen);
+                videoSection.setAttribute('aria-hidden', String(!isOpen));
+                body.classList.toggle('video-open', isOpen);
+
+                if (isOpen) {
+                    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+                    body.style.paddingRight = scrollBarWidth > 0 ? `${scrollBarWidth}px` : '';
+                } else {
+                    body.style.paddingRight = '';
+                }
+            };
+
+            const openVideo = (baseUrl = '') => {
+                if (!baseUrl) {
+                    return;
+                }
+                const autoplayUrl = baseUrl.includes('autoplay=1')
+                    ? baseUrl
+                    : `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}autoplay=1`;
+                iframe.src = autoplayUrl;
+                toggleVideoState(true);
+            };
+
+            const closeVideo = () => {
+                if (!videoSection.classList.contains(activeClass)) {
+                    return;
+                }
+                iframe.src = '';
+                toggleVideoState(false);
+            };
+
+            films.forEach((film) => {
+                film.addEventListener('click', () => openVideo(film.dataset.video));
+            });
+
+            closeButton.addEventListener('click', closeVideo);
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    closeVideo();
+                }
+            });
+        });
+    </script>
+
+    <script defer=""
+        src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+        data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;b092412883d0469a898071e050e226eb&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
